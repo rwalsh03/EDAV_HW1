@@ -8,18 +8,18 @@ survey <- survey[,c(-5:-11,-19:-38)]
 
 #dummy variables for each language/tool in tools
 tooldummies = c()
-toolList <- c("Github","Excel","SQL","RStudio","ggplot2","shell", "C/C","Python","LaTeX","(grep)","Sweave/knitr","XML","Web: html css js","dropbox","google drive","SPSS","Stata")
+toolList <- c("Matlab","lattice","Github","Excel","SQL","RStudio","ggplot2","shell", "C/C","Python","LaTeX","(grep)","Sweave/knitr","XML","Web: html css js","dropbox","google drive","SPSS","Stata")
 for(t in toolList){
   tooldummies <- cbind(tooldummies,grepl(t,survey$tools))
 }
 tooldummies <- cbind(tooldummies,(grepl("R,",survey$tools)==TRUE | (grepl("R",survey$tools)==TRUE & grepl("RStudio",survey$tools)==FALSE)))
-colnames(tooldummies) <- c("GitHub","Excel","SQL","RStudio","ggplot2","shell", "C","Python","LaTeX","grep","Sweave","XML","Web","dropbox","googledrive","SPSS","Stata","R")
+colnames(tooldummies) <- c("Matlab","lattice","GitHub","Excel","SQL","RStudio","ggplot2","shell", "C","Python","LaTeX","grep","Sweave","XML","Web","dropbox","googledrive","SPSS","Stata","R")
 survey <- cbind(survey,tooldummies)
 
 #quick summary info
 summary(survey)
 par(las = 2)
 par(mar=c(5,5,5,5))
-barplot(apply(survey[,12:29],2,mean),ylab = "Proportion of Class",ylim = c(0,1))
+barplot(apply(survey[,12:31],2,mean),ylab = "Proportion of Class",ylim = c(0,1))
 library(corrplot)
-corrplot(cor(survey[,12:29]),method='square')
+corrplot(cor(survey[,12:31]),method='square')
